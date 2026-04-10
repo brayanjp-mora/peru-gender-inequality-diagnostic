@@ -1,0 +1,26 @@
+# Data (keep structure, not contents)
+data/raw_data/*
+!data/raw_data/.gitkeep
+
+data/cleaned_data/*
+!data/cleaned_data/.gitkeep
+
+data/aggregated_results/*
+!data/aggregated_results/.gitkeep
+
+data/processed_data/*
+!data/processed_data/.gitkeep
+
+# Documentation 
+/documentation/
+
+# Sensitive scripts
+**/utils_download.R
+
+# R environment
+renv/library/
+renv/staging/
+renv/cache/
+
+# System files
+.DS_Store
