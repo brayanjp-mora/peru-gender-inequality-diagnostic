@@ -428,9 +428,9 @@ find_deprived_group <- function(data, variables, stochastic_n = 1, ...) {
       }
     }
     
-    # If no variable at this level yields a reliable "worst-off" group, stop.
+    # If no variable at this level yields a reliable "Deprived" group, stop.
     if (length(level_results) == 0) {
-      message("No further reliable 'worst-off' groups found. Stopping.")
+      message("No further reliable 'Deprived' groups found. Stopping.")
       break
     }
     
@@ -478,7 +478,7 @@ find_deprived_group <- function(data, variables, stochastic_n = 1, ...) {
 
 
 #=====================================================================
-#----------------- FORMAT WORST-OFF PATH FUNCTION ------------------
+#----------------- FORMAT Deprived PATH FUNCTION ------------------
 #=====================================================================
 format_deprived_path <- function(path_list) {
   # Use map_dfr to iterate through the list and create a dataframe

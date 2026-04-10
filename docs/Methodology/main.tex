@@ -85,20 +85,20 @@ Where $Median_{ref}$ is the median income of the reference group (e.g., Men) and
 \end{enumerate}
 These criteria are applied jointly, as no single metric is sufficient to ensure reliability in highly intersected survey subpopulations; estimates must simultaneously meet minimum size, statistical distinguishability, and variance-stability conditions to be retained. \\
 The minimum subgroup size threshold of n $\geq$ 100 per gender functions as a reporting and algorithm-continuation criterion rather than as a claim of sufficient statistical power. In sequential intersectional disaggregation, small cell sizes can generate highly unstable estimates that are disproportionately influenced by single observations, leading to spurious path selection and misleading subgroup rankings. The threshold therefore serves three complementary purposes: (i) to reduce estimate volatility in median-based gap calculations, (ii) to prevent algorithmic over-selection of extreme but substantively fragile intersections, and (iii) to mitigate disclosure and stigmatization risks associated with narrowly defined social groups. The value of 100 reflects a conservative, design-based balance between analytical granularity and ethical restraint rather than a universal statistical requirement.
-\section{The Randomized ``Worst-off" Algorithm}
+\section{The Randomized ``Deprived" Algorithm}
 \subsection{The intersectional Search Problem}
 A central challenge in LNOB analysis is the ``Combinatorial Explosion." With over 7 key structural variables (Ethnicity, Region, Pay Frequency, Contract, Age, Education, Commuting), these are hundreds of possible intersectional subgroups. Manually testing these introduces researcher bias. 
 \subsection{Algorithm Solution}
 We developed a custom Iterative Random-path Disaggregation Algorithm to objectively identify the groups facing the most severe structural exclusion. 
 \begin{enumerate}
     \item Randomized Selection: At each node of the decision tree, the algorithm randomly selects a subset of 5 variables. This prevents the model from deterministically choosing the same variable (e.g., Ethnicity) first every time, ensuring broader exploration of the solution space. 
-    \item Recursive Optimization: The algorithm calculates the income gap for all subgroups within the random subset. It selects the ``Worst-off" branch (lowest median income + highest inequality) and repeats the process on that subgroup. 
-    \item Pathfinding \& Replication: This process is repeated with 500 replications. The final output identifies the ``Most Frequent Worst-off Paths" –the specific combinations of identities (e.g., Indigenous $\to$ Daily Pay $\to$ Rural) that consistently appear at the bottom of the socioeconomic ladder across all simulations. 
+    \item Recursive Optimization: The algorithm calculates the income gap for all subgroups within the random subset. It selects the ``Deprived" branch (lowest median income + highest inequality) and repeats the process on that subgroup. 
+    \item Pathfinding \& Replication: This process is repeated with 500 replications. The final output identifies the ``Most Frequent Deprived Paths" –the specific combinations of identities (e.g., Indigenous $\to$ Daily Pay $\to$ Rural) that consistently appear at the bottom of the socioeconomic ladder across all simulations. 
 \end{enumerate}
 \section{Triangulation Strategy} (IN REVISION. I have not yet made a decision on the best way to approach how to identify the deprived)
 To validate the algorithm findings, the analysis employs a Three-Pillar Triangulation approach: 
 \begin{enumerate}
-    \item Intersectional Profiling: Deep-dive profiling of the top 3 ``Worst-Off" groups identifies by the algorithm (analyzing their specific barriers to health, trust, and rights.)
+    \item Intersectional Profiling: Deep-dive profiling of the top 3 ``Deprived" groups identifies by the algorithm (analyzing their specific barriers to health, trust, and rights.)
     \item Individual Profiling: Profiling individually the top variables that appears the most in the algorithm. 
     \item Geospatial Bivariate Mapping: A macro-level validation mapping Median Income vs. Inequality at the departmental and natural regional levels to visually explore the ``Zones of Exclusion"
 \end{enumerate}

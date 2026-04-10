@@ -2,11 +2,11 @@
 source(here::here("code", "00_analysis_setup.r"))
 
 #=====================================================================
-#----------------- BOOTSTRAPPED WORST-OFF ANALYSIS -------------------
+#----------------- BOOTSTRAPPED Deprived ANALYSIS -------------------
 #=====================================================================
 ## NOTES: 
 ## - This takes 29 hours to run. The results are pre-saved in the results folder for convenience.
-## - To run the code, you can select everything inside the BOOTSRAPPED WORST-OFF ANALYSIS section
+## - To run the code, you can select everything inside the BOOTSRAPPED Deprived ANALYSIS section
 ##   and toggle the line command
 #---------------------------------------------------------------------
 ## Define a master list of variables to sample from.
@@ -34,7 +34,7 @@ source(here::here("code", "00_analysis_setup.r"))
 #   message(paste("Using variables:", paste(analysis_vars, collapse = ", ")))
   
 #   ## Run the bootstrap analysis with the random set of variables
-#   bootstrap_results <- bootstrap_worst_off(
+#   bootstrap_results <- bootstrap_Deprived(
 #     data = dwincome, 
 #     variables = analysis_vars,
 #     n_replicates = 500, ## Using 500 for speed, can be increased
@@ -57,13 +57,13 @@ source(here::here("code", "00_analysis_setup.r"))
 # ## Print the final summary table, showing the most frequent paths at the top
 # print("--- Aggregated Results Across All Explorations ---")
 # print(final_summary, n = 100)
-# saveRDS(final_summary, "data/analysis_results/worst_off_summary.rds")
+# saveRDS(final_summary, "data/analysis_results/Deprived_summary.rds")
 #-----------------------------  END ----------------------------------
 #=====================================================================
 
 
 #=====================================================================
-#--------------- WORST OFF GROUP, ANALYSIS AND PROFILE ---------------
+#--------------- DEPRIVED GROUP, ANALYSIS AND PROFILE ---------------
 #=====================================================================
 
 #-----------------------------  END ----------------------------------

@@ -82,7 +82,7 @@ gap_analysis(dwincome %>%
 		filter(department %in% dep_filter), "education_group")
 dep_filter <- gap_analysis(
 		dwincome, "department", 
-		filter_by = c("data_reliability", "worst_off")) %>% 
+		filter_by = c("data_reliability", "Deprived")) %>% 
 	pull(department)
 
 profile_comparison_multiple(
@@ -101,7 +101,7 @@ gap_analysis(dwincome, "province", threshold = 500)
 prov_filter <- gap_analysis(
 		dwincome, "province", 
 		threshold = 500, 
-		filter_by = c("data_reliability", "worst_off")) %>% 
+		filter_by = c("data_reliability", "Deprived")) %>% 
 	pull(province)
 
 profile_comparison_multiple(
