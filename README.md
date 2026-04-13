@@ -100,6 +100,14 @@ The framework is designed to be adaptable and open to further development.
 
 ---
 
+## Use of AI Tools
+
+AI tools were used to assist with drafting text and implementing some custom functions based on the author’s specified methodology and algorithmic design. All code was reviewed and tested by the author to ensure alignment with the intended logic and expected outputs.
+
+The analytical design, methodological decisions, and interpretation of results remain the sole responsibility of the author.
+
+---
+
 ## License
 
 This project is released under the MIT License. You are free to use, modify, and distribute this work with attribution.
