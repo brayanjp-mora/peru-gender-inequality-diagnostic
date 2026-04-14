@@ -154,7 +154,7 @@ gap_analysis <- function(
 				((med_incomem - med_incomew)/med_incomem)*100
 		) %>%
 		mutate(
-			deprived = {
+			PPDS = {
 				income_check <- if (!is.null(threshold)) {
 					med_incomew <= threshold
 				} else {
@@ -204,13 +204,13 @@ gap_analysis <- function(
 				} else if ("data_reliability" %in% filter_by) {
 					. <- filter(., data_reliability != "unreliable")
 				}
-				if ("deprived" %in% filter_by) {
-					. <- filter(., deprived == "yes")
+				if ("PPDS" %in% filter_by) {
+					. <- filter(., PPDS == "yes")
 				}
 			}
 			.
 		} %>%
-		relocate(c("gap_ratio", "gap", "data_reliability", "deprived"), .after = med_incomew) %>%
+		relocate(c("gap_ratio", "gap", "data_reliability", "PPDS"), .after = med_incomew) %>%
 		relocate(
 			gap_ratio, .before = gap,
 		) %>%
@@ -234,9 +234,9 @@ gap_analysis <- function(
 
 
 #=====================================================================
-#----------------- BOOTSTRAP DEPRIVED ANALYSIS ---------------------
+#----------------- BOOTSTRAP PPDS ANALYSIS ---------------------
 #=====================================================================
-bootstrap_deprived <- function(data, variables, n_replicates = 100, ...) {
+bootstrap_PPDS <- function(data, variables, n_replicates = 100, ...) {
   
   # This will store the string representation of each path found
   path_results <- character(n_replicates)
@@ -249,16 +249,16 @@ bootstrap_deprived <- function(data, variables, n_replicates = 100, ...) {
     # Create a bootstrap sample of the data (sampling with replacement)
     bootstrap_sample <- data %>% sample_n(size = nrow(data), replace = TRUE)
     
-    # Run the find_deprived_group function on the bootstrap sample
+    # Run the find_PPDS_group function on the bootstrap sample
     # We use 'try' to catch any errors if a sample doesn't yield a path
     path <- try(
-      find_deprived_group(data = bootstrap_sample, variables = variables, ...),
+      find_PPDS_group(data = bootstrap_sample, variables = variables, ...),
       silent = TRUE
     )
     
     # If a path was found, format it and store it
     if (!inherits(path, "try-error") && length(path) > 0) {
-      path_string <- format_deprived_path(path) %>%
+      path_string <- format_PPDS_path(path) %>%
         mutate(path_step = paste(`Filter Variable`, `Filter Value`, sep = " == ")) %>%
         pull(path_step) %>%
         paste(collapse = " -> ")
@@ -403,9 +403,9 @@ profile_comparison_multiple <- function(data, variables, ...) {
 
 
 #=====================================================================
-#----------------- AUTOMATED DEPRIVED ANALYSIS FUNCTION --------------
+#----------------- AUTOMATED PPDS ANALYSIS FUNCTION --------------
 #=====================================================================
-find_deprived_group <- function(data, variables, stochastic_n = 1, ...) {
+find_PPDS_group <- function(data, variables, stochastic_n = 1, ...) {
   
   # Initialize with the full dataset and all variables
   current_data <- data
@@ -422,15 +422,15 @@ find_deprived_group <- function(data, variables, stochastic_n = 1, ...) {
     
     # Analyze each remaining variable on the current dataset
     for (var in remaining_vars) {
-      analysis <- gap_analysis(current_data, var, filter_by = c("data_reliability", "deprived"), ...)
+      analysis <- gap_analysis(current_data, var, filter_by = c("data_reliability", "PPDS"), ...)
       if (nrow(analysis) > 0) {
         level_results[[var]] <- analysis
       }
     }
     
-    # If no variable at this level yields a reliable "Deprived" group, stop.
+    # If no variable at this level yields a reliable "PPDS" group, stop.
     if (length(level_results) == 0) {
-      message("No further reliable 'Deprived' groups found. Stopping.")
+      message("No further reliable 'PPDS' groups found. Stopping.")
       break
     }
     
@@ -478,9 +478,9 @@ find_deprived_group <- function(data, variables, stochastic_n = 1, ...) {
 
 
 #=====================================================================
-#----------------- FORMAT Deprived PATH FUNCTION ------------------
+#----------------- FORMAT PPDS PATH FUNCTION ------------------
 #=====================================================================
-format_deprived_path <- function(path_list) {
+format_PPDS_path <- function(path_list) {
   # Use map_dfr to iterate through the list and create a dataframe
   summary_df <- purrr::map_dfr(seq_along(path_list), ~{
     step_name <- names(path_list)[.x]
