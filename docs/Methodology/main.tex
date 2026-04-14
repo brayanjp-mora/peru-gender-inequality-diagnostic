@@ -46,6 +46,11 @@ To validate the use of pooled data, a deflation and harmonization process was im
         \item This ensures that an income earned in 2017 is comparable in real purchasing power to an income earned in 2024. 
     \end{itemize}
 \end{enumerate}
+\section{Identification of Purchasing Power Disadvantaged Subgroups (PPDS)}
+The central objective of this framework is the identification of Purchasing Power Disadvantaged Subgroups (PPDS). These are population segments identified through empirical criteria applied to the harmonized survey data, defined by the intersection of two conditions:
+(i) Low median real liquid income (absolute deprivation).
+(ii) Substantial gender gaps in purchasing power relative to a reference group (relative inequality).
+The identification process is strictly descriptive and diagnostic; it does not imply direct causality but rather highlights intersections of identity and labor conditions that consistently reside at the lower bound of the economic distribution. This approach ensures that the "furthest behind" populations are visible under both absolute and relative metrics.
 \section{Geospatial Feature Engineering}
 To operationalize the ``Geographic Barrier" dimension, a novel variable measuring the distance between residence and workplace was engineered. 
 \begin{itemize}
@@ -85,20 +90,20 @@ Where $Median_{ref}$ is the median income of the reference group (e.g., Men) and
 \end{enumerate}
 These criteria are applied jointly, as no single metric is sufficient to ensure reliability in highly intersected survey subpopulations; estimates must simultaneously meet minimum size, statistical distinguishability, and variance-stability conditions to be retained. \\
 The minimum subgroup size threshold of n $\geq$ 100 per gender functions as a reporting and algorithm-continuation criterion rather than as a claim of sufficient statistical power. In sequential intersectional disaggregation, small cell sizes can generate highly unstable estimates that are disproportionately influenced by single observations, leading to spurious path selection and misleading subgroup rankings. The threshold therefore serves three complementary purposes: (i) to reduce estimate volatility in median-based gap calculations, (ii) to prevent algorithmic over-selection of extreme but substantively fragile intersections, and (iii) to mitigate disclosure and stigmatization risks associated with narrowly defined social groups. The value of 100 reflects a conservative, design-based balance between analytical granularity and ethical restraint rather than a universal statistical requirement.
-\section{The Randomized ``Worst-off" Algorithm}
+\section{The Randomized ``PPDS" Algorithm}
 \subsection{The intersectional Search Problem}
 A central challenge in LNOB analysis is the ``Combinatorial Explosion." With over 7 key structural variables (Ethnicity, Region, Pay Frequency, Contract, Age, Education, Commuting), these are hundreds of possible intersectional subgroups. Manually testing these introduces researcher bias. 
 \subsection{Algorithm Solution}
 We developed a custom Iterative Random-path Disaggregation Algorithm to objectively identify the groups facing the most severe structural exclusion. 
 \begin{enumerate}
     \item Randomized Selection: At each node of the decision tree, the algorithm randomly selects a subset of 5 variables. This prevents the model from deterministically choosing the same variable (e.g., Ethnicity) first every time, ensuring broader exploration of the solution space. 
-    \item Recursive Optimization: The algorithm calculates the income gap for all subgroups within the random subset. It selects the ``Worst-off" branch (lowest median income + highest inequality) and repeats the process on that subgroup. 
-    \item Pathfinding \& Replication: This process is repeated with 500 replications. The final output identifies the ``Most Frequent Worst-off Paths" –the specific combinations of identities (e.g., Indigenous $\to$ Daily Pay $\to$ Rural) that consistently appear at the bottom of the socioeconomic ladder across all simulations. 
+    \item Recursive Optimization: The algorithm calculates the income gap for all subgroups within the random subset. It selects the ``PPDS" branch (lowest median income + highest inequality) and repeats the process on that subgroup. 
+    \item Pathfinding \& Replication: This process is repeated with 500 replications. The final output identifies the ``Most Frequent PPDS Paths" –the specific combinations of identities (e.g., Indigenous $\to$ Daily Pay $\to$ Rural) that consistently appear at the bottom of the socioeconomic ladder across all simulations. 
 \end{enumerate}
-\section{Triangulation Strategy} (IN REVISION. I have not yet made a decision on the best way to approach how to identify the deprived)
+\section{Triangulation Strategy} (IN REVISION. I have not yet made a decision on the best way to approach how to identify the PPDS)
 To validate the algorithm findings, the analysis employs a Three-Pillar Triangulation approach: 
 \begin{enumerate}
-    \item Intersectional Profiling: Deep-dive profiling of the top 3 ``Worst-Off" groups identifies by the algorithm (analyzing their specific barriers to health, trust, and rights.)
+    \item Intersectional Profiling: Deep-dive profiling of the top 3 ``PPDS" groups identifies by the algorithm (analyzing their specific barriers to health, trust, and rights.)
     \item Individual Profiling: Profiling individually the top variables that appears the most in the algorithm. 
     \item Geospatial Bivariate Mapping: A macro-level validation mapping Median Income vs. Inequality at the departmental and natural regional levels to visually explore the ``Zones of Exclusion"
 \end{enumerate}

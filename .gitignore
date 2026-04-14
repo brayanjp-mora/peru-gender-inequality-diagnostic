@@ -22,6 +22,15 @@ renv/library/
 renv/staging/
 renv/cache/
 
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fbd_latexmk
+*.fls
+
 # System files
 .DS_Store
 
