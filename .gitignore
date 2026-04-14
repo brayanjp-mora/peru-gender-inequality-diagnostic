@@ -24,3 +24,15 @@ renv/cache/
 
 # System files
 .DS_Store
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.out
+*.toc
+
+# PDFs (generated)
+docs/Methodology/main.pdf
